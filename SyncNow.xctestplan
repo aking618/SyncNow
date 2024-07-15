@@ -1,0 +1,37 @@
+{
+  "configurations" : [
+    {
+      "id" : "E166D208-C12C-4234-A0AE-17D2C25E1AAA",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:SyncNow.xcodeproj",
+      "identifier" : "EDFD14F32C41CC010062C6CD",
+      "name" : "SyncNow"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:SyncNow.xcodeproj",
+        "identifier" : "EDFD15032C41CC020062C6CD",
+        "name" : "SyncNowTests"
+      }
+    },
+    {
+      "enabled" : false,
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:SyncNow.xcodeproj",
+        "identifier" : "EDFD150D2C41CC020062C6CD",
+        "name" : "SyncNowUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

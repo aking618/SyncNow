@@ -9,24 +9,46 @@ import ComposableArchitecture
 import SwiftUI
 
 struct StandupsListFeature: Reducer {
-    struct State {
+    struct State: Equatable {
+        @PresentationState var addStandup: StandupFormFeature.State?
         var standups: IdentifiedArrayOf<Standup> = []
     }
 
+    @CasePathable
     enum Action {
         case addButtonTapped
+        case addStandup(PresentationAction<StandupFormFeature.Action>)
+        case cancelStandupButtonTapped
+        case saveStandupButtonTapped
     }
+
+    @Dependency(\.uuid) var uuid
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
             case .addButtonTapped:
-                state.standups.append(
-                    Standup(id: UUID(), theme: .allCases.randomElement()!)
-                )
+                state.addStandup = StandupFormFeature.State(standup: Standup(id: uuid()))
+                return .none
+
+            case .addStandup:
+                return .none
+
+            case .cancelStandupButtonTapped:
+                state.addStandup = nil
+                return .none
+
+            case .saveStandupButtonTapped:
+                guard let standup = state.addStandup?.standup else { return .none }
+                state.standups.append(standup)
+                state.addStandup = nil
                 return .none
             }
         }
+        .ifLet(\.$addStandup, action: /Action.addStandup ) {
+            StandupFormFeature()
+        }
+
     }
 }
 
@@ -37,8 +59,12 @@ struct StandupListView: View {
         WithViewStore(store, observe: \.standups) { viewStore in
             List {
                 ForEach(viewStore.state) { standup in
-                    CardView(standup: standup)
-                        .listRowBackground(standup.theme.mainColor)
+                    NavigationLink(
+                        state: AppFeature.Path.State.detail(StandupDetailFeature.State(standup: standup))
+                    ) {
+                        CardView(standup: standup)
+                    }
+                    .listRowBackground(standup.theme.mainColor)
                 }
             }
             .navigationTitle("Daily Standups")
@@ -47,6 +73,29 @@ struct StandupListView: View {
                     Button("Add") {
                         viewStore.send(.addButtonTapped)
                     }
+                }
+            }
+            .sheet(
+                store: store.scope(
+                    state: \.$addStandup,
+                    action: { .addStandup($0) }
+                )
+            ) { store in
+                NavigationStack {
+                    StandupFormView(store: store)
+                        .navigationTitle("New standup")
+                        .toolbar {
+                            ToolbarItem {
+                                Button("Save") {
+                                    viewStore.send(.saveStandupButtonTapped)
+                                }
+                            }
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Cancel") {
+                                    viewStore.send(.cancelStandupButtonTapped)
+                                }
+                            }
+                        }
                 }
             }
         }
@@ -65,9 +114,9 @@ struct CardView: View {
                 Label("\(standup.attendees.count)", systemImage: "person.3")
                     .accessibilityLabel("\(standup.attendees.count) attendees")
                 Spacer()
-                Label("\(standup.duration)", systemImage: "clock")
+                Label("\(standup.duration.formatted(.units()))", systemImage: "clock")
                     .accessibilityLabel("\(standup.duration) minute meeting")
-                    .labelStyle(.iconOnly)
+                    .labelStyle(.titleAndIcon)
             }
             .font(.caption)
         }

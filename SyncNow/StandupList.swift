@@ -1,5 +1,5 @@
 //
-//  StandupListView.swift
+//  StandupList.swift
 //  SyncNow
 //
 //  Created by Ayren King on 7/12/24.
@@ -14,8 +14,7 @@ struct StandupsListFeature: Reducer {
         var standups: IdentifiedArrayOf<Standup> = []
     }
 
-    @CasePathable
-    enum Action {
+    enum Action: Equatable {
         case addButtonTapped
         case addStandup(PresentationAction<StandupFormFeature.Action>)
         case cancelStandupButtonTapped

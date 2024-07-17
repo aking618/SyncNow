@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED75EFFB2C484F6D00D3AA6B /* RecordMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75EFFA2C484F4000D3AA6B /* RecordMeeting.swift */; };
 		EDFD14F82C41CC010062C6CD /* SyncNowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD14F72C41CC010062C6CD /* SyncNowApp.swift */; };
-		EDFD14FA2C41CC010062C6CD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD14F92C41CC010062C6CD /* ContentView.swift */; };
 		EDFD14FC2C41CC020062C6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDFD14FB2C41CC020062C6CD /* Assets.xcassets */; };
 		EDFD14FF2C41CC020062C6CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDFD14FE2C41CC020062C6CD /* Preview Assets.xcassets */; };
 		EDFD15092C41CC020062C6CD /* SyncNowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15082C41CC020062C6CD /* SyncNowTests.swift */; };
 		EDFD15132C41CC020062C6CD /* SyncNowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15122C41CC020062C6CD /* SyncNowUITests.swift */; };
 		EDFD15152C41CC020062C6CD /* SyncNowUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15142C41CC020062C6CD /* SyncNowUITestsLaunchTests.swift */; };
 		EDFD15232C41CC510062C6CD /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = EDFD15222C41CC510062C6CD /* ComposableArchitecture */; };
-		EDFD15252C41CC810062C6CD /* StandupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15242C41CC810062C6CD /* StandupListView.swift */; };
+		EDFD15252C41CC810062C6CD /* StandupList.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15242C41CC810062C6CD /* StandupList.swift */; };
 		EDFD15272C41CD710062C6CD /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15262C41CD710062C6CD /* Models.swift */; };
 		EDFD15292C454EB10062C6CD /* StandupForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15282C454EB10062C6CD /* StandupForm.swift */; };
 		EDFD152B2C455BC60062C6CD /* StandupFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD152A2C455BC60062C6CD /* StandupFormTests.swift */; };
 		EDFD152E2C45A79D0062C6CD /* StandupsListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD152D2C45A79D0062C6CD /* StandupsListTests.swift */; };
-		EDFD15332C45AE2C0062C6CD /* StandupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15322C45AE2C0062C6CD /* StandupDetailView.swift */; };
+		EDFD15332C45AE2C0062C6CD /* StandupDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15322C45AE2C0062C6CD /* StandupDetail.swift */; };
 		EDFD15352C46D2030062C6CD /* StandupDetailTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15342C46D2030062C6CD /* StandupDetailTests.swift */; };
-		EDFD15372C47114B0062C6CD /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15362C47114B0062C6CD /* AppView.swift */; };
+		EDFD15372C47114B0062C6CD /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15362C47114B0062C6CD /* App.swift */; };
+		EDFD15392C47FF7E0062C6CD /* AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD15382C47FF7E0062C6CD /* AppTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,9 +44,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		ED75EFFA2C484F4000D3AA6B /* RecordMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMeeting.swift; sourceTree = "<group>"; };
 		EDFD14F42C41CC010062C6CD /* SyncNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFD14F72C41CC010062C6CD /* SyncNowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncNowApp.swift; sourceTree = "<group>"; };
-		EDFD14F92C41CC010062C6CD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EDFD14FB2C41CC020062C6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDFD14FE2C41CC020062C6CD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EDFD15042C41CC020062C6CD /* SyncNowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncNowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,15 +54,16 @@
 		EDFD150E2C41CC020062C6CD /* SyncNowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SyncNowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFD15122C41CC020062C6CD /* SyncNowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncNowUITests.swift; sourceTree = "<group>"; };
 		EDFD15142C41CC020062C6CD /* SyncNowUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncNowUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		EDFD15242C41CC810062C6CD /* StandupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupListView.swift; sourceTree = "<group>"; };
+		EDFD15242C41CC810062C6CD /* StandupList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupList.swift; sourceTree = "<group>"; };
 		EDFD15262C41CD710062C6CD /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		EDFD15282C454EB10062C6CD /* StandupForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupForm.swift; sourceTree = "<group>"; };
 		EDFD152A2C455BC60062C6CD /* StandupFormTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupFormTests.swift; sourceTree = "<group>"; };
 		EDFD152C2C456A900062C6CD /* SyncNow.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SyncNow.xctestplan; sourceTree = "<group>"; };
 		EDFD152D2C45A79D0062C6CD /* StandupsListTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupsListTests.swift; sourceTree = "<group>"; };
-		EDFD15322C45AE2C0062C6CD /* StandupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetailView.swift; sourceTree = "<group>"; };
+		EDFD15322C45AE2C0062C6CD /* StandupDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetail.swift; sourceTree = "<group>"; };
 		EDFD15342C46D2030062C6CD /* StandupDetailTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandupDetailTests.swift; sourceTree = "<group>"; };
-		EDFD15362C47114B0062C6CD /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		EDFD15362C47114B0062C6CD /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		EDFD15382C47FF7E0062C6CD /* AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,11 +117,11 @@
 		EDFD14F62C41CC010062C6CD /* SyncNow */ = {
 			isa = PBXGroup;
 			children = (
+				ED75EFFA2C484F4000D3AA6B /* RecordMeeting.swift */,
 				EDFD14F72C41CC010062C6CD /* SyncNowApp.swift */,
-				EDFD14F92C41CC010062C6CD /* ContentView.swift */,
-				EDFD15242C41CC810062C6CD /* StandupListView.swift */,
-				EDFD15362C47114B0062C6CD /* AppView.swift */,
-				EDFD15322C45AE2C0062C6CD /* StandupDetailView.swift */,
+				EDFD15242C41CC810062C6CD /* StandupList.swift */,
+				EDFD15362C47114B0062C6CD /* App.swift */,
+				EDFD15322C45AE2C0062C6CD /* StandupDetail.swift */,
 				EDFD15282C454EB10062C6CD /* StandupForm.swift */,
 				EDFD15262C41CD710062C6CD /* Models.swift */,
 				EDFD14FB2C41CC020062C6CD /* Assets.xcassets */,
@@ -143,6 +145,7 @@
 				EDFD152A2C455BC60062C6CD /* StandupFormTests.swift */,
 				EDFD152D2C45A79D0062C6CD /* StandupsListTests.swift */,
 				EDFD15342C46D2030062C6CD /* StandupDetailTests.swift */,
+				EDFD15382C47FF7E0062C6CD /* AppTests.swift */,
 			);
 			path = SyncNowTests;
 			sourceTree = "<group>";
@@ -301,11 +304,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDFD15252C41CC810062C6CD /* StandupListView.swift in Sources */,
+				EDFD15252C41CC810062C6CD /* StandupList.swift in Sources */,
 				EDFD15292C454EB10062C6CD /* StandupForm.swift in Sources */,
-				EDFD15332C45AE2C0062C6CD /* StandupDetailView.swift in Sources */,
-				EDFD15372C47114B0062C6CD /* AppView.swift in Sources */,
-				EDFD14FA2C41CC010062C6CD /* ContentView.swift in Sources */,
+				EDFD15332C45AE2C0062C6CD /* StandupDetail.swift in Sources */,
+				EDFD15372C47114B0062C6CD /* App.swift in Sources */,
+				ED75EFFB2C484F6D00D3AA6B /* RecordMeeting.swift in Sources */,
 				EDFD14F82C41CC010062C6CD /* SyncNowApp.swift in Sources */,
 				EDFD15272C41CD710062C6CD /* Models.swift in Sources */,
 			);
@@ -318,6 +321,7 @@
 				EDFD15352C46D2030062C6CD /* StandupDetailTests.swift in Sources */,
 				EDFD15092C41CC020062C6CD /* SyncNowTests.swift in Sources */,
 				EDFD152E2C45A79D0062C6CD /* StandupsListTests.swift in Sources */,
+				EDFD15392C47FF7E0062C6CD /* AppTests.swift in Sources */,
 				EDFD152B2C455BC60062C6CD /* StandupFormTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +482,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SyncNow/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Audo will be recorded to provide a transcription of the meeting.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -506,6 +511,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"SyncNow/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "Audo will be recorded to provide a transcription of the meeting.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -1,5 +1,5 @@
 //
-//  AppView.swift
+//  App.swift
 //  SyncNow
 //
 //  Created by Ayren King on 7/16/24.
@@ -11,27 +11,32 @@ import SwiftUI
 struct AppFeature: Reducer {
 
     struct Path: Reducer {
-        enum State {
+        enum State: Equatable {
             case detail(StandupDetailFeature.State)
+            case recordMeeting(RecordMeeting.State)
         }
 
-        enum Action {
+        enum Action: Equatable  {
             case detail(StandupDetailFeature.Action)
+            case recordMeeting(RecordMeeting.Action)
         }
 
         var body: some ReducerOf<Self> {
             Scope(state: /State.detail, action: /Action.detail) {
                 StandupDetailFeature()
             }
+            Scope(state: /State.recordMeeting, action: /Action.recordMeeting) {
+                RecordMeeting()
+            }
         }
     }
 
-    struct State {
+    struct State: Equatable {
         var path = StackState<Path.State>()
         var standupsList = StandupsListFeature.State()
     }
 
-    enum Action {
+    enum Action: Equatable {
         case path(StackAction<Path.State, Path.Action>)
         case standupList(StandupsListFeature.Action)
     }
@@ -48,6 +53,8 @@ struct AppFeature: Reducer {
             switch action {
             case let .path(.element(id: _, action: .detail(.delegate(action)))):
                 switch action {
+                case let .deleteStandup(id):
+                    state.standupsList.standups.remove(id: id)
                 case let .standupUpdated(standup):
                     state.standupsList.standups[id: standup.id] = standup
                 }
@@ -84,6 +91,12 @@ struct AppView: View {
                     /AppFeature.Path.State.detail,
                      action: AppFeature.Path.Action.detail,
                      then: StandupDetailView.init(store:)
+                )
+            case .recordMeeting:
+                CaseLet(
+                    /AppFeature.Path.State.recordMeeting,
+                     action: AppFeature.Path.Action.recordMeeting,
+                     then: RecordMeetingView.init(store:)
                 )
             }
         }

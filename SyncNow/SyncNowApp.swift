@@ -21,7 +21,6 @@ struct SyncNowApp: App {
                     )
                 ) {
                     AppFeature()
-                        ._printChanges()
                 }
             )
         }

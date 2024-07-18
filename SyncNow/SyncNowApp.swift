@@ -12,11 +12,18 @@ import SwiftUI
 struct SyncNowApp: App {
     var body: some Scene {
         WindowGroup {
+            var standup = Standup.mock
+            let _ = standup.duration = .seconds(6)
+
             AppView(
                 store: Store(
                     initialState: AppFeature.State(
+                        path: StackState([
+//                            .detail(.init(standup: .mock)),
+//                            .recordMeeting(.init(standup: standup))
+                        ]),
                         standupsList: StandupsListFeature.State(
-                            standups: [.mock]
+//                            standups: [.mock]
                         )
                     )
                 ) {

@@ -11,9 +11,11 @@ import SwiftUI
 
 struct RecordMeeting: Reducer {
     struct State: Equatable {
+        @PresentationState var alert: AlertState<Action.Alert>?
         var secondsElapsed = 0
         var speakerIndex = 0
         let standup: Standup
+        var transcript = ""
 
         var durationRemaining: Duration {
             standup.duration - .seconds(secondsElapsed)
@@ -21,40 +23,131 @@ struct RecordMeeting: Reducer {
     }
 
     enum Action: Equatable {
+        case alert(PresentationAction<Alert>)
+        case delegate(Delegate)
         case onTask
         case endMeetingButtonTapped
         case nextButtonTapped
+        case speechResult(String)
         case timerTicked
+
+        enum Alert {
+            case confirmDiscard
+            case confirmSave
+        }
+
+        enum Delegate: Equatable {
+            case saveMeeting(transcript: String)
+        }
     }
 
     @Dependency(\.continuousClock) var clock
+    @Dependency(\.dismiss) var dismiss
+    @Dependency(\.speechClient) var speechClient
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+            case .alert(.presented(.confirmDiscard)):
+                return .run { _ in await self.dismiss() }
+
+            case .alert(.presented(.confirmSave)):
+                return  .run { [transcript = state.transcript] send in
+                    await send(.delegate(.saveMeeting(transcript: transcript)))
+                    await self.dismiss()
+                }
+
+            case .alert(.dismiss):
+                return .none
+
+            case .delegate:
+                return .none
+
             case .endMeetingButtonTapped:
+                state.alert = .endMeeting(isDiscardable: true)
                 return .none
 
             case .nextButtonTapped:
+                guard state.speakerIndex < state.standup.attendees.count - 1 else {
+                    state.alert = .endMeeting(isDiscardable: false)
+                    return .none
+                }
+
+                state.speakerIndex += 1
+                state.secondsElapsed = state.speakerIndex * Int(state.standup.durationPerAttendee.components.seconds)
                 return .none
 
             case .onTask:
                 return .run { send in
-                    let status = await withUnsafeContinuation { continuation in
-                        SFSpeechRecognizer.requestAuthorization { status in
-                            continuation.resume(with: .success(status))
-                        }
-                    }
-
-                    for await _ in clock.timer(interval: .seconds(1)) {
-                        await send(.timerTicked)
-                    }
+                    await self.onTask(send: send)
                 }
 
+            case let .speechResult(transcript):
+                state.transcript = transcript
+                return .none
+
             case .timerTicked:
+                guard state.alert == nil else { return .none }
                 state.secondsElapsed += 1
+                let secondsPerAttendee = Int(state.standup.durationPerAttendee.components.seconds)
+                if state.secondsElapsed.isMultiple(of: secondsPerAttendee) {
+                    if state.speakerIndex == state.standup.attendees.count - 1 {
+                        return .run { [transcript = state.transcript] send in
+                            await send(.delegate(.saveMeeting(transcript: transcript)))
+                            await dismiss()
+                        }
+                    }
+                    state.speakerIndex += 1
+                }
                 return .none
             }
+        }
+        .ifLet(\.$alert, action: /Action.alert)
+    }
+
+    private func onTask(send: Send<Action>) async {
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask {
+                let status = await speechClient.requestAuthorization()
+
+                if status == .authorized {
+                    do {
+                        for try await transcript in speechClient.start() {
+                            await send(.speechResult(transcript))
+                        }
+                    } catch {
+
+                    }
+                }
+            }
+
+            group.addTask {
+                for await _ in clock.timer(interval: .seconds(1)) {
+                    await send(.timerTicked)
+                }
+            }
+        }
+    }
+}
+
+extension AlertState where Action == RecordMeeting.Action.Alert {
+    static func endMeeting(isDiscardable: Bool) -> Self {
+        AlertState {
+            TextState("End meeting?")
+        } actions: {
+            ButtonState(action: .confirmSave) {
+                TextState("Save and end")
+            }
+            if isDiscardable {
+                ButtonState(role: .destructive, action: .confirmDiscard) {
+                    TextState("Discard")
+                }
+            }
+            ButtonState(role: .cancel) {
+                TextState("Resume")
+            }
+        } message: {
+            TextState("You are ending the meeting early. What would you like to do?")
         }
     }
 }
@@ -101,6 +194,7 @@ struct RecordMeetingView: View {
             }
             .navigationBarBackButtonHidden(true)
             .task { await viewStore.send(.onTask).finish() }
+            .alert(store: store.scope(state: \.$alert, action: { .alert($0) }))
         }
     }
 }

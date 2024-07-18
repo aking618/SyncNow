@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		ED75EFFB2C484F6D00D3AA6B /* RecordMeeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75EFFA2C484F4000D3AA6B /* RecordMeeting.swift */; };
+		ED75EFFD2C4857C100D3AA6B /* SpeechClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75EFFC2C4857C100D3AA6B /* SpeechClient.swift */; };
+		ED75EFFF2C496A9400D3AA6B /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75EFFE2C496A9400D3AA6B /* Meeting.swift */; };
+		ED75F0012C499E0D00D3AA6B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75F0002C499E0D00D3AA6B /* DataManager.swift */; };
 		EDFD14F82C41CC010062C6CD /* SyncNowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDFD14F72C41CC010062C6CD /* SyncNowApp.swift */; };
 		EDFD14FC2C41CC020062C6CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDFD14FB2C41CC020062C6CD /* Assets.xcassets */; };
 		EDFD14FF2C41CC020062C6CD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDFD14FE2C41CC020062C6CD /* Preview Assets.xcassets */; };
@@ -45,6 +48,9 @@
 
 /* Begin PBXFileReference section */
 		ED75EFFA2C484F4000D3AA6B /* RecordMeeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordMeeting.swift; sourceTree = "<group>"; };
+		ED75EFFC2C4857C100D3AA6B /* SpeechClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechClient.swift; sourceTree = "<group>"; };
+		ED75EFFE2C496A9400D3AA6B /* Meeting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		ED75F0002C499E0D00D3AA6B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		EDFD14F42C41CC010062C6CD /* SyncNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SyncNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDFD14F72C41CC010062C6CD /* SyncNowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncNowApp.swift; sourceTree = "<group>"; };
 		EDFD14FB2C41CC020062C6CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -95,6 +101,7 @@
 		EDFD14EB2C41CC010062C6CD = {
 			isa = PBXGroup;
 			children = (
+				ED75EFFE2C496A9400D3AA6B /* Meeting.swift */,
 				EDFD152C2C456A900062C6CD /* SyncNow.xctestplan */,
 				EDFD14F62C41CC010062C6CD /* SyncNow */,
 				EDFD15072C41CC020062C6CD /* SyncNowTests */,
@@ -118,9 +125,11 @@
 			isa = PBXGroup;
 			children = (
 				ED75EFFA2C484F4000D3AA6B /* RecordMeeting.swift */,
+				ED75EFFC2C4857C100D3AA6B /* SpeechClient.swift */,
 				EDFD14F72C41CC010062C6CD /* SyncNowApp.swift */,
 				EDFD15242C41CC810062C6CD /* StandupList.swift */,
 				EDFD15362C47114B0062C6CD /* App.swift */,
+				ED75F0002C499E0D00D3AA6B /* DataManager.swift */,
 				EDFD15322C45AE2C0062C6CD /* StandupDetail.swift */,
 				EDFD15282C454EB10062C6CD /* StandupForm.swift */,
 				EDFD15262C41CD710062C6CD /* Models.swift */,
@@ -305,9 +314,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDFD15252C41CC810062C6CD /* StandupList.swift in Sources */,
+				ED75F0012C499E0D00D3AA6B /* DataManager.swift in Sources */,
+				ED75EFFF2C496A9400D3AA6B /* Meeting.swift in Sources */,
 				EDFD15292C454EB10062C6CD /* StandupForm.swift in Sources */,
 				EDFD15332C45AE2C0062C6CD /* StandupDetail.swift in Sources */,
 				EDFD15372C47114B0062C6CD /* App.swift in Sources */,
+				ED75EFFD2C4857C100D3AA6B /* SpeechClient.swift in Sources */,
 				ED75EFFB2C484F6D00D3AA6B /* RecordMeeting.swift in Sources */,
 				EDFD14F82C41CC010062C6CD /* SyncNowApp.swift in Sources */,
 				EDFD15272C41CD710062C6CD /* Models.swift in Sources */,

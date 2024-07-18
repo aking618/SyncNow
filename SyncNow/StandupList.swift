@@ -12,6 +12,16 @@ struct StandupsListFeature: Reducer {
     struct State: Equatable {
         @PresentationState var addStandup: StandupFormFeature.State?
         var standups: IdentifiedArrayOf<Standup> = []
+
+        init(addStandup: StandupFormFeature.State? = nil) {
+            self.addStandup = addStandup
+            do {
+                @Dependency(\.dataManager.load) var loadData
+                self.standups = try JSONDecoder().decode(IdentifiedArrayOf<Standup>.self, from: loadData(.standups))
+            } catch {
+                self.standups = []
+            }
+        }
     }
 
     enum Action: Equatable {
@@ -129,7 +139,7 @@ struct CardView: View {
     MainActor.assumeIsolated {
         NavigationStack {
             StandupListView(
-                store: Store(initialState: StandupsListFeature.State(standups: [.mock])) {
+                store: Store(initialState: StandupsListFeature.State()) {
                     StandupsListFeature()
                 }
             )
